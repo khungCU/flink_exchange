@@ -1,0 +1,206 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n\u003e :bulb: This example will show how you can use the set operation `UNION ALL` to combine several streams of data.\n\nSee [our documentation](https://ci.apache.org/projects/flink/flink-docs-stable/docs/dev/table/sql/queries/set-ops/)\nfor a full list of fantastic set operations Apache Flink supports.\n\n\n## The Sources\n\nThe examples assumes you are building an application that is tracking visits :fox_face: on foreign planets :chestnut:. \nThere are three sources of visits. The universe of Rick and Morty, the very real world of NASA and such, \nand the not so real world of Hitchhikers Guide To The Galaxy.\n\nAll three tables are `unbounded` and backed by the [`faker` connector](https://flink-packages.org/packages/flink-faker).\n\nAll sources of tracked visits have the `location` and `visit_time` in common. Some have `visitors`, some have\n`spacecrafts` and one has both.",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-08 12:00:22.405",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n\u003cp\u003e💡 This example will show how you can use the set operation \u003ccode\u003eUNION ALL\u003c/code\u003e to combine several streams of data.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eSee \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/docs/dev/table/sql/queries/set-ops/\"\u003eour documentation\u003c/a\u003e\u003cbr /\u003e\nfor a full list of fantastic set operations Apache Flink supports.\u003c/p\u003e\n\u003ch2\u003eThe Sources\u003c/h2\u003e\n\u003cp\u003eThe examples assumes you are building an application that is tracking visits 🦊 on foreign planets 🌰.\u003cbr /\u003e\nThere are three sources of visits. The universe of Rick and Morty, the very real world of NASA and such,\u003cbr /\u003e\nand the not so real world of Hitchhikers Guide To The Galaxy.\u003c/p\u003e\n\u003cp\u003eAll three tables are \u003ccode\u003eunbounded\u003c/code\u003e and backed by the \u003ca href\u003d\"https://flink-packages.org/packages/flink-faker\"\u003e\u003ccode\u003efaker\u003c/code\u003e connector\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003eAll sources of tracked visits have the \u003ccode\u003elocation\u003c/code\u003e and \u003ccode\u003evisit_time\u003c/code\u003e in common. Some have \u003ccode\u003evisitors\u003c/code\u003e, some have\u003cbr /\u003e\n\u003ccode\u003espacecrafts\u003c/code\u003e and one has both.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633665596345_1179241591",
+      "id": "paragraph_1633665596345_1179241591",
+      "dateCreated": "2021-10-08 11:59:56.345",
+      "dateStarted": "2021-10-08 12:00:22.404",
+      "dateFinished": "2021-10-08 12:00:22.421",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\nDROP TEMPORARY TABLE IF EXISTS rickandmorty_visits;\n\nCREATE TEMPORARY TABLE rickandmorty_visits ( \n    visitor STRING,\n    location STRING, \n    visit_time TIMESTAMP(3)\n) WITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027, \n  \u0027fields.visitor.expression\u0027 \u003d \u0027#{RickAndMorty.character}\u0027,\n  \u0027fields.location.expression\u0027 \u003d  \u0027#{RickAndMorty.location}\u0027,\n  \u0027fields.visit_time.expression\u0027 \u003d  \u0027#{date.past \u0027\u002715\u0027\u0027,\u0027\u00275\u0027\u0027,\u0027\u0027SECONDS\u0027\u0027}\u0027\n);\n\nDROP TEMPORARY TABLE IF EXISTS spaceagency_visits;\n\nCREATE TEMPORARY TABLE spaceagency_visits ( \n    spacecraft STRING,\n    location STRING, \n    visit_time TIMESTAMP(3)\n) WITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027, \n  \u0027fields.spacecraft.expression\u0027 \u003d \u0027#{Space.nasaSpaceCraft}\u0027,\n  \u0027fields.location.expression\u0027 \u003d  \u0027#{Space.star}\u0027,\n  \u0027fields.visit_time.expression\u0027 \u003d  \u0027#{date.past \u0027\u002715\u0027\u0027,\u0027\u00275\u0027\u0027,\u0027\u0027SECONDS\u0027\u0027}\u0027\n);\n\nDROP TEMPORARY TABLE IF EXISTS hitchhiker_visits;\n\nCREATE TEMPORARY TABLE hitchhiker_visits ( \n    visitor STRING,\n    starship STRING,\n    location STRING, \n    visit_time TIMESTAMP(3)\n) WITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027, \n  \u0027fields.visitor.expression\u0027 \u003d \u0027#{HitchhikersGuideToTheGalaxy.character}\u0027,\n  \u0027fields.starship.expression\u0027 \u003d \u0027#{HitchhikersGuideToTheGalaxy.starship}\u0027,\n  \u0027fields.location.expression\u0027 \u003d  \u0027#{HitchhikersGuideToTheGalaxy.location}\u0027,\n  \u0027fields.visit_time.expression\u0027 \u003d  \u0027#{date.past \u0027\u002715\u0027\u0027,\u0027\u00275\u0027\u0027,\u0027\u0027SECONDS\u0027\u0027}\u0027\n);",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 12:32:09.221",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\nTable has been dropped.\nTable has been created.\nTable has been dropped.\nTable has been created.\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633665622404_601255421",
+      "id": "paragraph_1633665622404_601255421",
+      "dateCreated": "2021-10-08 12:00:22.404",
+      "dateStarted": "2021-10-09 12:32:09.222",
+      "dateFinished": "2021-10-09 12:32:09.452",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\nSELECT visitor, \u0027\u0027 AS spacecraft, location, visit_time FROM rickandmorty_visits\nUNION ALL\nSELECT \u0027\u0027 AS visitor, spacecraft, location, visit_time FROM spaceagency_visits\nUNION ALL\nSELECT visitor, starship AS spacecraft, location, visit_time FROM hitchhiker_visits\nORDER BY visit_time desc\nLIMIT 100\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-09 12:32:17.394",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "visitor": "string",
+                      "spacecraft": "string",
+                      "location": "string",
+                      "visit_time": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "visitor\tspacecraft\tlocation\tvisit_time\n\tChallenger\tArcturus\t2021-10-09 17:34:07.000\n\tMercury\tRigel\t2021-10-09 17:34:07.000\n\tColumbia\tProcyon B\t2021-10-09 17:34:07.000\n\tEndeavour\tRigil Kentaurus\t2021-10-09 17:34:07.000\n\tMercury\tRoss 248\t2021-10-09 17:34:07.000\n\tDiscovery\tArcturus\t2021-10-09 17:34:07.000\n\tColumbia\tSirius A\t2021-10-09 17:34:07.000\n\tChallenger\tSun\t2021-10-09 17:34:07.000\n\tGemini\tBarnards Star\t2021-10-09 17:34:07.000\n\tOrion\tProxima Centauri\t2021-10-09 17:34:07.000\n\tOrion\tSun\t2021-10-09 17:34:07.000\n\tGemini\tSirius A\t2021-10-09 17:34:07.000\n\tOrion\tBarnards Star\t2021-10-09 17:34:07.000\n\tColumbia\tSirius B\t2021-10-09 17:34:07.000\n\tMercury\tRigel\t2021-10-09 17:34:07.000\n\tChallenger\tPolaris\t2021-10-09 17:34:07.000\n\tEnterprise\tRigil Kentaurus\t2021-10-09 17:34:07.000\n\tChallenger\tProcyon B\t2021-10-09 17:34:07.000\n\tAtlantis\tMahasim\t2021-10-09 17:34:07.000\n\tDiscovery\tPolaris\t2021-10-09 17:34:07.000\n\tEndeavour\tLuyten 726-8A\t2021-10-09 17:34:07.000\n\tApollo\tArcturus\t2021-10-09 17:34:07.000\n\tDiscovery\tBetelgeuse\t2021-10-09 17:34:07.000\n\tMercury\tWolf 359\t2021-10-09 17:34:07.000\n\tAtlantis\tProxima Centauri\t2021-10-09 17:34:07.000\n\tMercury\tProcyon B\t2021-10-09 17:34:07.000\n\tDiscovery\tBetelgeuse\t2021-10-09 17:34:07.000\n\tDiscovery\tArcturus\t2021-10-09 17:34:07.000\n\tOrion\tProxima Centauri\t2021-10-09 17:34:07.000\n\tChallenger\tProxima Centauri\t2021-10-09 17:34:07.000\n\tMercury\tRoss 154\t2021-10-09 17:34:07.000\n\tMercury\tLuyten 726-8B\t2021-10-09 17:34:07.000\nAbradolf Lincler\t\tSnorlab\t2021-10-09 17:34:07.000\nAbradolf Lincler\t\tDimension C-132\t2021-10-09 17:34:07.000\nAbradolf Lincler\t\tScreaming Sun Earth\t2021-10-09 17:34:07.000\nAgda\tBistromath\tSpace\t2021-10-09 17:34:07.000\nAgrajag\tBillion Year Bunker\tFrogstar World B\t2021-10-09 17:34:07.000\nAgrajag\tRW6\tHorsehead Nebula\t2021-10-09 17:34:07.000\nArthricia\t\tDwarf Terrace-9\t2021-10-09 17:34:07.000\nArthricia\t\tGlapflap\t2021-10-09 17:34:07.000\nArthur Philip Deodat\tBillion Year Bunker\tKakrafoon Kappa\t2021-10-09 17:34:07.000\nArthur Philip Deodat\tStarship Titanic\tHighgate Cemetery\t2021-10-09 17:34:07.000\nArthur Philip Deodat\tStarship Titanic\tMilliways\t2021-10-09 17:34:07.000\nBarry Manilow\tGolgafrinchan Ark Fleet Ship B\tFrance\t2021-10-09 17:34:07.000\nBarry Manilow\tKrikkit One\tXaxis\t2021-10-09 17:34:07.000\nBeth Smith\t\tDimension C-132\t2021-10-09 17:34:07.000\nBeth Smith\t\tArbolez Mentorosos\t2021-10-09 17:34:07.000\nBeth\u0027s Mytholog\t\tGazorpazorp\t2021-10-09 17:34:07.000\nBirdperson\t\tInterdimensional Customs\t2021-10-09 17:34:07.000\nBirdperson\t\tPlanet Squanch\t2021-10-09 17:34:07.000\nCharles Darwin\tRW6\tSlim\u0027s Throat Emporium\t2021-10-09 17:34:07.000\nCousin Nicky\t\tHideout Planet\t2021-10-09 17:34:07.000\nCousin Nicky\t\tDimension C-137\t2021-10-09 17:34:07.000\nDeep Thought\tVogon Constructor Fleet\tRickmansworth\t2021-10-09 17:34:07.000\nDr. Glip-Glop\t\tDwarf Terrace-9\t2021-10-09 17:34:07.000\nEccentrica Gallumbits\tHeart of Gold\tRickmansworth\t2021-10-09 17:34:07.000\nElvis\tStarship Titanic\tHorse and Groom\t2021-10-09 17:34:07.000\nEmily Saunders\tHeart of Gold\tMegabrantis cluster\t2021-10-09 17:34:07.000\nEvil Morty\t\tHideout Planet\t2021-10-09 17:34:07.000\nEyeholes Man\t\tBird World\t2021-10-09 17:34:07.000\nEyeholes Man\t\tSnorlab\t2021-10-09 17:34:07.000\nEyeholes Man\t\tDimension C-132\t2021-10-09 17:34:07.000\nEyeholes Man\t\tGlapflap\t2021-10-09 17:34:07.000\nFenchurch\tVogon Constructor Fleet\tMilliways\t2021-10-09 17:34:07.000\nFrankie and Benjy\tGolgafrinchan Ark Fleet Ship B\tYsllodins\t2021-10-09 17:34:07.000\nFrankie and Benjy\tGolgafrinchan Ark Fleet Ship B\tTotal Perspective Vortex\t2021-10-09 17:34:07.000\nGag Halfrunt\tRW6\tMilliways\t2021-10-09 17:34:07.000\nGail Andrews\tBillion Year Bunker\tHighgate Cemetery\t2021-10-09 17:34:07.000\nGalaxia Woonbeam\tStarship Titanic\tCathedral of Chalesm\t2021-10-09 17:34:07.000\nGarkbit\tGolgafrinchan Ark Fleet Ship B\tPreliumtarn\t2021-10-09 17:34:07.000\nGrunthos the Flatulent\tGolgafrinchan Ark Fleet Ship B\tThe Big Bang Burger Bar\t2021-10-09 17:34:07.000\nHillman Hunter\tBillion Year Bunker\tEvildrome Boozarama\t2021-10-09 17:34:07.000\nHumma Kavula\tVogon Constructor Fleet\tLamuella\t2021-10-09 17:34:07.000\nJessica\t\tPurge Planet\t2021-10-09 17:34:07.000\nJinJenz\tBillion Year Bunker\tPleiades system\t2021-10-09 17:34:07.000\nLighthouse Chief\t\tBird World\t2021-10-09 17:34:07.000\nLintilla\tBistromath\tIbiza\t2021-10-09 17:34:07.000\nLoggins\t\tBird World\t2021-10-09 17:34:07.000\nLoonquawl and Phouchg\tStarship Titanic\tRupert\t2021-10-09 17:34:07.000\nMajikthise\tRW6\tOglaroon\t2021-10-09 17:34:07.000\nMorty Jr.\t\tScreaming Sun Earth\t2021-10-09 17:34:07.000\nMorty Jr.\t\tPlanet Squanch\t2021-10-09 17:34:07.000\nMorty Jr.\t\tSnorlab\t2021-10-09 17:34:07.000\nMr. Meeseeks\t\tGazorpazorp\t2021-10-09 17:34:07.000\nMr. Needful\t\tAlphabetrium\t2021-10-09 17:34:07.000\nMr. Poopybutthole\t\tScreaming Sun Earth\t2021-10-09 17:34:07.000\nOolon Colluphid\tBistromath\tThe Big Bang Burger Bar\t2021-10-09 17:34:07.000\nOolon Colluphid\tBillion Year Bunker\tThe Domain of The King\t2021-10-09 17:34:07.000\nPasta Fasta\tStarship Titanic\tBournemouth\t2021-10-09 17:34:07.000\nPrak\tRW6\tCafé Lou\t2021-10-09 17:34:07.000\nQuestular Rontok\tKrikkit One\tBournemouth\t2021-10-09 17:34:07.000\nRandom Dent\tRW6\tCathedral of Chalesm\t2021-10-09 17:34:07.000\nReg Nullify\tTanngrisnir\tMegabrantis cluster\t2021-10-09 17:34:07.000\nRoosta\tBillion Year Bunker\tDenmark\t2021-10-09 17:34:07.000\nSlartibartfast\tBillion Year Bunker\tThe Domain of The King\t2021-10-09 17:34:07.000\nSummer Smith\t\tHideout Planet\t2021-10-09 17:34:07.000\nSummer Smith\t\tDimension C-132\t2021-10-09 17:34:07.000\nTricia McMillan\tTanngrisnir\tFrogstar system\t2021-10-09 17:34:07.000\nTrillian\tBillion Year Bunker\tMegabrantis cluster\t2021-10-09 17:34:07.000\nUnity\t\tDimension C-132\t2021-10-09 17:34:07.000\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to run sql command: SELECT visitor, \u0027\u0027 AS spacecraft, location, visit_time FROM rickandmorty_visits\nUNION ALL\nSELECT \u0027\u0027 AS visitor, spacecraft, location, visit_time FROM spaceagency_visits\nUNION ALL\nSELECT visitor, starship AS spacecraft, location, visit_time FROM hitchhiker_visits\nORDER BY visit_time desc\nLIMIT 100\njava.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:177)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:109)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:86)\n\tat org.apache.zeppelin.flink.FlinkSqlInterpreter.callSelect(FlinkSqlInterpreter.java:494)\n\tat org.apache.zeppelin.flink.FlinkSqlInterpreter.callCommand(FlinkSqlInterpreter.java:257)\n\tat org.apache.zeppelin.flink.FlinkSqlInterpreter.runSqlList(FlinkSqlInterpreter.java:151)\n\tat org.apache.zeppelin.flink.FlinkSqlInterpreter.internalInterpret(FlinkSqlInterpreter.java:109)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:55)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:849)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:741)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.flink.client.deployment.application.UnsuccessfulExecutionException: Application Status: CANCELED\n\tat org.apache.flink.client.deployment.application.UnsuccessfulExecutionException.fromJobResult(UnsuccessfulExecutionException.java:71)\n\tat org.apache.flink.client.deployment.application.EmbeddedJobClient.lambda$getJobExecutionResult$2(EmbeddedJobClient.java:136)\n\tat java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:616)\n\tat java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:591)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.client.deployment.application.JobStatusPollingUtils.lambda$null$2(JobStatusPollingUtils.java:101)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.runtime.rpc.akka.AkkaInvocationHandler.lambda$invokeRpc$0(AkkaInvocationHandler.java:250)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.util.concurrent.FutureUtils.doForward(FutureUtils.java:1389)\n\tat org.apache.flink.runtime.concurrent.akka.ClassLoadingUtils.lambda$null$1(ClassLoadingUtils.java:93)\n\tat org.apache.flink.runtime.concurrent.akka.ClassLoadingUtils.runWithContextClassLoader(ClassLoadingUtils.java:68)\n\tat org.apache.flink.runtime.concurrent.akka.ClassLoadingUtils.lambda$guardCompletionWithContextClassLoader$2(ClassLoadingUtils.java:92)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.runtime.concurrent.akka.AkkaFutureUtils$1.onComplete(AkkaFutureUtils.java:47)\n\tat akka.dispatch.OnComplete.internal(Future.scala:300)\n\tat akka.dispatch.OnComplete.internal(Future.scala:297)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:224)\n\tat akka.dispatch.japi$CallbackBridge.apply(Future.scala:221)\n\tat scala.concurrent.impl.CallbackRunnable.run(Promise.scala:60)\n\tat org.apache.flink.runtime.concurrent.akka.AkkaFutureUtils$DirectExecutionContext.execute(AkkaFutureUtils.java:65)\n\tat scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:68)\n\tat scala.concurrent.impl.Promise$DefaultPromise.$anonfun$tryComplete$1(Promise.scala:284)\n\tat scala.concurrent.impl.Promise$DefaultPromise.$anonfun$tryComplete$1$adapted(Promise.scala:284)\n\tat scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:284)\n\tat akka.pattern.PromiseActorRef.$bang(AskSupport.scala:621)\n\tat akka.pattern.PipeToSupport$PipeableFuture$$anonfun$pipeTo$1.applyOrElse(PipeToSupport.scala:24)\n\tat akka.pattern.PipeToSupport$PipeableFuture$$anonfun$pipeTo$1.applyOrElse(PipeToSupport.scala:23)\n\tat scala.concurrent.Future.$anonfun$andThen$1(Future.scala:532)\n\tat scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:29)\n\tat scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:29)\n\tat scala.concurrent.impl.CallbackRunnable.run(Promise.scala:60)\n\tat akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:63)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:100)\n\tat scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:12)\n\tat scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:81)\n\tat akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:100)\n\tat akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:49)\n\tat akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:48)\n\tat java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)\n\tat java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)\n\tat java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)\n\tat java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)\nCaused by: org.apache.flink.runtime.client.JobCancellationException: Job was cancelled.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:146)\n\tat org.apache.flink.client.deployment.application.UnsuccessfulExecutionException.fromJobResult(UnsuccessfulExecutionException.java:60)\n\t... 52 more\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "https://knox.c-fa375384f1f481e0.cn-hongkong.emr.aliyuncs.com:8443/gateway/cluster-topo/yarn/proxy/application_1628498781174_4106/#/job/26d72000b4d9c787e4c3b3617ada81d6"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633665671787_1508326744",
+      "id": "paragraph_1633665671787_1508326744",
+      "dateCreated": "2021-10-08 12:01:11.787",
+      "dateStarted": "2021-10-09 12:32:17.395",
+      "dateFinished": "2021-10-09 12:34:15.083",
+      "status": "ABORT"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-08 12:02:33.859",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1633665753859_1186981791",
+      "id": "paragraph_1633665753859_1186981791",
+      "dateCreated": "2021-10-08 12:02:33.859",
+      "status": "READY"
+    }
+  ],
+  "name": "02 Building the Union of Multiple Streams",
+  "id": "2GJJCR6H2",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.10.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

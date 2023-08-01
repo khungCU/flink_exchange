@@ -1,0 +1,265 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n\u003e :bulb: This example will show how you can use joins to correlate rows across multiple tables.\n\nFlink SQL supports complex and flexible join operations over continuous tables. There are several different types of joins to account for the wide variety of semantics queries may require.\n\nRegular joins are the most generic and flexible type of join. These include the standard `INNER` and `[FULL|LEFT|RIGHT] OUTER` joins that are available in most modern databases. \n\nSuppose we have a [NOC list](https://en.wikipedia.org/wiki/Non-official_cover) of secret agents all over the world. Your mission if you choose to accept it, is to join this table with another containin the agents real name.\n\nIn Flink SQL, this can be achieved using a simple `INNER JOIN`. Flink will join the tables using an equi-join predicate on the `agent_id` and output a new row everytime there is a match.\n\nHowever, there is something to be careful of. Flink must retain every input row as part of the join to potentially join it with the other table in the future. This means the queries resource requirements will grow indefinitely and will eventually fail. While this type of join is useful in some scenarios, other joins are more powerful in a streaming context and significantly more space-efficient.\n\nIn this example, both tables are bounded to remain space efficient.\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-08 22:56:11.153",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n\u003cp\u003e💡 This example will show how you can use joins to correlate rows across multiple tables.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eFlink SQL supports complex and flexible join operations over continuous tables. There are several different types of joins to account for the wide variety of semantics queries may require.\u003c/p\u003e\n\u003cp\u003eRegular joins are the most generic and flexible type of join. These include the standard \u003ccode\u003eINNER\u003c/code\u003e and \u003ccode\u003e[FULL|LEFT|RIGHT] OUTER\u003c/code\u003e joins that are available in most modern databases.\u003c/p\u003e\n\u003cp\u003eSuppose we have a \u003ca href\u003d\"https://en.wikipedia.org/wiki/Non-official_cover\"\u003eNOC list\u003c/a\u003e of secret agents all over the world. Your mission if you choose to accept it, is to join this table with another containin the agents real name.\u003c/p\u003e\n\u003cp\u003eIn Flink SQL, this can be achieved using a simple \u003ccode\u003eINNER JOIN\u003c/code\u003e. Flink will join the tables using an equi-join predicate on the \u003ccode\u003eagent_id\u003c/code\u003e and output a new row everytime there is a match.\u003c/p\u003e\n\u003cp\u003eHowever, there is something to be careful of. Flink must retain every input row as part of the join to potentially join it with the other table in the future. This means the queries resource requirements will grow indefinitely and will eventually fail. While this type of join is useful in some scenarios, other joins are more powerful in a streaming context and significantly more space-efficient.\u003c/p\u003e\n\u003cp\u003eIn this example, both tables are bounded to remain space efficient.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614316653435_771824735",
+      "id": "paragraph_1614316653435_771824735",
+      "dateCreated": "2021-02-26 13:17:33.438",
+      "dateStarted": "2021-10-08 22:56:11.154",
+      "dateFinished": "2021-10-08 22:56:11.159",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n本例将展示如何使用 joins 来将多个表中的行关联起来。\n\nFlink SQL 支持对连续表的灵活且复杂的join操作。有几种不同类型的连接用来应对广泛的查询语义的要求。\n\nRegular joins（普通连接）是最通用且最灵活的连接类型，它包括大多数现代数据库提供的标准的 `INNER` 和  `[FULL|LEFT|RIGHT] OUTER` 连接。\n\n假设我们有一个全世界范围内的密码代理的[NOC 列表](https://en.wikipedia.org/wiki/Non-official_cover)。如果你选择接受，你的任务是将这个表与另一个包含代理真实名称的表关联。\n\n这个任务使用 Flink SQL 的 `INNER JOIN` 可以轻松实现。 Flink 将在 `agent_id` 上使用 equi-join 谓词来连接表，然后在每当有匹配时输出一个新的行记录。\n\n但是，这里有一些地方需要注意。Flink 为了能够在将来能让表中的行与另一张表中潜在的行进行关联，它必须保留输入的每一行。这意味着查询资源的需求将无限增长并最终失败。但是这种类型的连接在一些场景下很有用，其他的连接在流处理环境下很有用并且拥有显著的空间效率。\n\n本例中，2 个表都是有界的以节省空间。\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-18 15:56:01.436",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e本例将展示如何使用 joins 来将多个表中的行关联起来。\u003c/p\u003e\n\u003cp\u003eFlink SQL 支持对连续表的灵活且复杂的join操作。有几种不同类型的连接用来应对广泛的查询语义的要求。\u003c/p\u003e\n\u003cp\u003eRegular joins（普通连接）是最通用且最灵活的连接类型，它包括大多数现代数据库提供的标准的 \u003ccode\u003eINNER\u003c/code\u003e 和  \u003ccode\u003e[FULL|LEFT|RIGHT] OUTER\u003c/code\u003e 连接。\u003c/p\u003e\n\u003cp\u003e假设我们有一个全世界范围内的密码代理的\u003ca href\u003d\"https://en.wikipedia.org/wiki/Non-official_cover\"\u003eNOC 列表\u003c/a\u003e。如果你选择接受，你的任务是将这个表与另一个包含代理真实名称的表关联。\u003c/p\u003e\n\u003cp\u003e这个任务使用 Flink SQL 的 \u003ccode\u003eINNER JOIN\u003c/code\u003e 可以轻松实现。 Flink 将在 \u003ccode\u003eagent_id\u003c/code\u003e 上使用 equi-join 谓词来连接表，然后在每当有匹配时输出一个新的行记录。\u003c/p\u003e\n\u003cp\u003e但是，这里有一些地方需要注意。Flink 为了能够在将来能让表中的行与另一张表中潜在的行进行关联，它必须保留输入的每一行。这意味着查询资源的需求将无限增长并最终失败。但是这种类型的连接在一些场景下很有用，其他的连接在流处理环境下很有用并且拥有显著的空间效率。\u003c/p\u003e\n\u003cp\u003e本例中，2 个表都是有界的以节省空间。\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615185616790_975194353",
+      "id": "paragraph_1615185616790_975194353",
+      "dateCreated": "2021-03-08 06:40:16.790",
+      "dateStarted": "2021-03-18 15:56:01.434",
+      "dateFinished": "2021-03-18 15:56:01.459",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\nDROP TABLE IF EXISTS NOC;\n\nCREATE TABLE NOC (\n  agent_id STRING,\n  codename STRING\n)\nWITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027,\n  \u0027fields.agent_id.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(1|2|3|4|5){1}\u0027\u0027}\u0027,\n  \u0027fields.codename.expression\u0027 \u003d \u0027#{superhero.name}\u0027,\n  \u0027number-of-rows\u0027 \u003d \u002710\u0027\n);\n\nDROP TABLE IF EXISTS RealNames;\n\nCREATE TABLE RealNames (\n  agent_id STRING,\n  name     STRING\n)\nWITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027,\n  \u0027fields.agent_id.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(1|2|3|4|5){1}\u0027\u0027}\u0027,\n  \u0027fields.name.expression\u0027 \u003d \u0027#{Name.full_name}\u0027,\n  \u0027number-of-rows\u0027 \u003d \u002710\u0027\n);\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-16 15:29:57.203",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\nTable has been dropped.\nTable has been created.\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614305028935_1653205277",
+      "id": "paragraph_1614305028935_1653205277",
+      "dateCreated": "2021-02-26 10:03:48.936",
+      "dateStarted": "2023-07-16 15:29:57.222",
+      "dateFinished": "2023-07-16 15:30:18.830",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql(type\u003dupdate)\n\nSELECT\n    name,\n    codename\nFROM NOC\nINNER JOIN RealNames ON NOC.agent_id \u003d RealNames.agent_id;\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-16 15:31:07.583",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "name": "string",
+                      "codename": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "name",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "codename",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "name\tcodename\nAlba Sipes DVM\tDoctor Magneto Brain\nCarlos Stoltenberg Sr.\tDoctor Magneto Brain\nDr. Derick Bechtelar\tDarkseid IX\nDuane Hessel\tYellowjacket I\nDuane Hessel\tSnowbird\nDuane Hessel\tJustice Woman\nJefferey Klein\tNiki Sanders the Hunter\nJefferey Klein\tSteel\nJenniffer Hills\tDarkseid IX\nMiss Kendrick Berge\tYellowjacket I\nMiss Kendrick Berge\tSnowbird\nMiss Kendrick Berge\tJustice Woman\nMrs. Clementina Wolff\tDarkseid IX\nRenay Kozey\tSteel\nRenay Kozey\tNiki Sanders the Hunter\nTina Hirthe\tThe Gardner\nTina Hirthe\tLobo Dragon\nTina Hirthe\tOnslaught\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "http://localhost:8081#/job/9534c153ea3378caf4dd7d9b1901311a"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614305202536_606838204",
+      "id": "paragraph_1614305202536_606838204",
+      "dateCreated": "2021-02-26 10:06:42.536",
+      "dateStarted": "2023-07-16 15:31:07.607",
+      "dateFinished": "2023-07-16 15:31:16.640",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-16 14:40:45.236",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689518445236_91389521",
+      "id": "paragraph_1689518445236_91389521",
+      "dateCreated": "2023-07-16 14:40:45.236",
+      "status": "READY"
+    }
+  ],
+  "name": "01 Regular Joins",
+  "id": "2FYA62DSS",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.10.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

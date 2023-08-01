@@ -1,0 +1,122 @@
+# https://github.com/zjffdu/flink-sql-cookbook-on-zeppelin/tree/main
+
+# driver faker
+# https://github.com/knaufk/flink-faker
+
+# Remote mode
+# https://zjffdu.gitbook.io/flink-on-zeppelin/execution-mode/remote-mode
+
+# Add dependency
+# https://zeppelin.apache.org/docs/latest/interpreter/flink.html#pyflink
+
+# example
+# https://medium.com/analytics-vidhya/learn-flink-sql-the-easy-way-d9d48a95ae57
+
+# CDC demo
+# https://github.com/ververica/flink-sql-CDC
+---
+version: '3.4'
+services:
+  zookeeper:
+    image: debezium/zookeeper:1.2
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  broker:
+    image: debezium/kafka:1.2
+    container_name: broker
+    hostname: broker
+    ports:
+      - 9092:9092
+    links:
+      - zookeeper
+    depends_on:
+      - zookeeper
+    environment:
+      ZOOKEEPER_CONNECT: "zookeeper:2181"
+  zeppelin:
+    image: apache/zeppelin:0.10.1
+    hostname: zeppelin
+    container_name: zeppelin
+    depends_on:
+      - zookeeper
+      - kafka
+      - taskmanager
+    ports:
+      - "9080:8080" 
+      - "9081:8081"
+    environment:
+      ZEPPELIN_NOTEBOOK_DIR: "/notebook"
+      FLINK_HOME: "/opt/flink"
+    volumes:
+      - ${PWD}/notebook:/notebook
+      - ${PWD}/flink-1.14.6:/opt/flink
+  postgres:
+    container_name: postgres
+    build: ./postgres-image
+    image: demo/postgres-pop
+    ports:
+     - 5432:5432
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+    volumes:
+     - ${PWD}/postgres-image:/docker-entrypoint-initdb.d
+  connect:
+    image: debezium/connect:1.2
+    container_name: connect
+    ports:
+     - 8083:8083
+    links:
+     - broker
+     - postgres
+    depends_on:
+      - broker
+      - zookeeper
+      - taskmanager
+    environment:
+     - BOOTSTRAP_SERVERS=broker:9092
+     - GROUP_ID=test-consumer-group
+     - CONFIG_STORAGE_TOPIC=my_connect_configs
+     - OFFSET_STORAGE_TOPIC=my_connect_offsets
+     - STATUS_STORAGE_TOPIC=my_connect_statuses
+  sql-client:
+    build: ./client-image
+    image: demo/debezium-flink-sql
+    container_name: sql-client
+    depends_on:
+      - broker
+      - jobmanager
+    environment:
+      FLINK_JOBMANAGER_HOST: jobmanager
+      ZOOKEEPER_CONNECT: zookeeper
+      KAFKA_BOOTSTRAP: kafka
+  jobmanager:
+    image: flink:1.14.6-scala_2.12
+    container_name: jobmanager
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    volumes:
+      - ${PWD}/artifacts:/opt/flink/lib
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+  taskmanager:
+    image: flink:1.14.6-scala_2.12
+    container_name: taskmanager
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    volumes:
+      - ${PWD}/artifacts/:/opt/flink/lib
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2

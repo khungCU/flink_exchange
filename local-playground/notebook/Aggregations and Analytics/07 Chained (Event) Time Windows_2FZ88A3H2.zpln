@@ -1,0 +1,301 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n\u003e :bulb: This example will show how to efficiently aggregate time series data on two different levels of granularity.\n\nThe source table (`server_logs`) is backed by the [`faker` connector](https://flink-packages.org/packages/flink-faker), which continuously generates rows in memory based on Java Faker expressions.\n\nBased on our `server_logs` table we would like to compute the average request size over one minute **as well as five minute (event) windows.** \nFor this, you could run two queries, similar to the one in [Aggregating Time Series Data](../01_group_by_window/01_group_by_window.md). \nAt the end of the page is the script and resulting JobGraph from this approach. \n\nIn the main part, we will follow a slightly more efficient approach that chains the two aggregations: the one-minute aggregation output serves as the five-minute aggregation input.\n\nWe then use a [Statements Set](../../foundations/08_statement_sets/08_statement_sets.md) to write out the two result tables. \nTo keep this example self-contained, we use two tables of type `blackhole` instead of `kafka`, `filesystem`, or any other [connectors](https://ci.apache.org/projects/flink/flink-docs-stable/docs/connectors/table/overview/). ",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-08 16:30:31.850",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n\u003cp\u003e💡 This example will show how to efficiently aggregate time series data on two different levels of granularity.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eThe source table (\u003ccode\u003eserver_logs\u003c/code\u003e) is backed by the \u003ca href\u003d\"https://flink-packages.org/packages/flink-faker\"\u003e\u003ccode\u003efaker\u003c/code\u003e connector\u003c/a\u003e, which continuously generates rows in memory based on Java Faker expressions.\u003c/p\u003e\n\u003cp\u003eBased on our \u003ccode\u003eserver_logs\u003c/code\u003e table we would like to compute the average request size over one minute \u003cstrong\u003eas well as five minute (event) windows.\u003c/strong\u003e\u003cbr /\u003e\nFor this, you could run two queries, similar to the one in \u003ca href\u003d\"../01_group_by_window/01_group_by_window.md\"\u003eAggregating Time Series Data\u003c/a\u003e.\u003cbr /\u003e\nAt the end of the page is the script and resulting JobGraph from this approach.\u003c/p\u003e\n\u003cp\u003eIn the main part, we will follow a slightly more efficient approach that chains the two aggregations: the one-minute aggregation output serves as the five-minute aggregation input.\u003c/p\u003e\n\u003cp\u003eWe then use a \u003ca href\u003d\"../../foundations/08_statement_sets/08_statement_sets.md\"\u003eStatements Set\u003c/a\u003e to write out the two result tables.\u003cbr /\u003e\nTo keep this example self-contained, we use two tables of type \u003ccode\u003eblackhole\u003c/code\u003e instead of \u003ccode\u003ekafka\u003c/code\u003e, \u003ccode\u003efilesystem\u003c/code\u003e, or any other \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/docs/connectors/table/overview/\"\u003econnectors\u003c/a\u003e.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614313809667_126135129",
+      "id": "paragraph_1614313809667_126135129",
+      "dateCreated": "2021-02-26 12:30:09.667",
+      "dateStarted": "2021-10-08 16:30:31.852",
+      "dateFinished": "2021-10-08 16:30:31.860",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n本例将展示如何在2个不同的粒度等级上高校的聚合时间序列数据。\n\n例子中使用的 source 表`server_logs` 的数据是利用  [`faker` connector](https://github.com/knaufk/flink-faker) 产生的，它基于 Java Faker 表达式不断的在内存中生成数据\n\n基于我们的 `server_logs 表我们可能希望计算每分钟**以及每5分钟**的平均请求大小, 为此，我们可以运行 2 条与 Aggregating Time Series Data 例子中类似查询语句。这种方式的搅合和结果 JobGraph 在页面的末尾。\n\n对其中主要的部分，我们将使用一个稍微高效的方式即将 2 个聚合链接起来：将一分钟的聚合输出作为 5 分钟的聚合输入。\n\n接着我们使用 `runAsOne` 向 2 张结果表写入数据。为了让这个例子不依赖任何依赖，我们直接使用 2 个 `blackhole` 类型的表，而不用  `kafka`, `filesystem` 等其他[connectors](https://ci.apache.org/projects/flink/flink-docs-release-1.12/dev/table/connectors/)。\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-18 15:55:06.388",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e本例将展示如何在2个不同的粒度等级上高校的聚合时间序列数据。\u003c/p\u003e\n\u003cp\u003e例子中使用的 source 表\u003ccode\u003eserver_logs\u003c/code\u003e 的数据是利用  \u003ca href\u003d\"https://github.com/knaufk/flink-faker\"\u003e\u003ccode\u003efaker\u003c/code\u003e connector\u003c/a\u003e 产生的，它基于 Java Faker 表达式不断的在内存中生成数据\u003c/p\u003e\n\u003cp\u003e基于我们的 `server_logs 表我们可能希望计算每分钟\u003cstrong\u003e以及每5分钟\u003c/strong\u003e的平均请求大小, 为此，我们可以运行 2 条与 Aggregating Time Series Data 例子中类似查询语句。这种方式的搅合和结果 JobGraph 在页面的末尾。\u003c/p\u003e\n\u003cp\u003e对其中主要的部分，我们将使用一个稍微高效的方式即将 2 个聚合链接起来：将一分钟的聚合输出作为 5 分钟的聚合输入。\u003c/p\u003e\n\u003cp\u003e接着我们使用 \u003ccode\u003erunAsOne\u003c/code\u003e 向 2 张结果表写入数据。为了让这个例子不依赖任何依赖，我们直接使用 2 个 \u003ccode\u003eblackhole\u003c/code\u003e 类型的表，而不用  \u003ccode\u003ekafka\u003c/code\u003e, \u003ccode\u003efilesystem\u003c/code\u003e 等其他\u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-release-1.12/dev/table/connectors/\"\u003econnectors\u003c/a\u003e。\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615118584595_491576797",
+      "id": "paragraph_1615118584595_491576797",
+      "dateCreated": "2021-03-07 12:03:04.595",
+      "dateStarted": "2021-03-18 15:55:06.394",
+      "dateFinished": "2021-03-18 15:55:06.412",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\nDROP TABLE IF EXISTS server_logs;\n\nCREATE TABLE server_logs ( \n    log_time TIMESTAMP(3),\n    client_ip STRING,\n    client_identity STRING, \n    userid STRING, \n    request_line STRING, \n    status_code STRING, \n    size INT, \n    WATERMARK FOR log_time AS log_time - INTERVAL \u002715\u0027 SECONDS\n) WITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027, \n  \u0027fields.client_ip.expression\u0027 \u003d \u0027#{Internet.publicIpV4Address}\u0027,\n  \u0027fields.client_identity.expression\u0027 \u003d  \u0027-\u0027,\n  \u0027fields.userid.expression\u0027 \u003d  \u0027#{regexify \u0027\u0027(morsapaes|knauf|sjwiesman){1}\u0027\u0027}\u0027,\n  \u0027fields.log_time.expression\u0027 \u003d  \u0027#{date.past \u0027\u002715\u0027\u0027,\u0027\u00275\u0027\u0027,\u0027\u0027SECONDS\u0027\u0027}\u0027,\n  \u0027fields.request_line.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(GET|POST|PUT|PATCH){1}\u0027\u0027} #{regexify \u0027\u0027(/search\\.html|/login\\.html|/prod\\.html|cart\\.html|/order\\.html){1}\u0027\u0027} #{regexify \u0027\u0027(HTTP/1\\.1|HTTP/2|/HTTP/1\\.0){1}\u0027\u0027}\u0027,\n  \u0027fields.status_code.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(200|201|204|400|401|403|301){1}\u0027\u0027}\u0027,\n  \u0027fields.size.expression\u0027 \u003d \u0027#{number.numberBetween \u0027\u0027100\u0027\u0027,\u0027\u002710000000\u0027\u0027}\u0027\n);\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 12:31:10.680",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304339896_1045253871",
+      "id": "paragraph_1614304339896_1045253871",
+      "dateCreated": "2021-02-26 09:52:19.896",
+      "dateStarted": "2021-02-26 12:31:10.712",
+      "dateFinished": "2021-02-26 12:31:11.499",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\n\nDROP TABLE IF EXISTS avg_request_size_1m;\n\nCREATE TABLE avg_request_size_1m (\n  window_start TIMESTAMP(3),\n  window_end TIMESTAMP(3),\n  avg_size BIGINT\n)\nWITH (\n  \u0027connector\u0027 \u003d \u0027blackhole\u0027\n);\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 12:31:27.312",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304362241_1160995788",
+      "id": "paragraph_1614304362241_1160995788",
+      "dateCreated": "2021-02-26 09:52:42.241",
+      "dateStarted": "2021-02-26 12:31:27.321",
+      "dateFinished": "2021-02-26 12:31:28.185",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\nDROP TABLE IF EXISTS avg_request_size_5m;\n\nCREATE TABLE avg_request_size_5m (\n  window_start TIMESTAMP(3),\n  window_end TIMESTAMP(3),\n  avg_size BIGINT\n)\nWITH (\n  \u0027connector\u0027 \u003d \u0027blackhole\u0027\n);\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 12:31:29.268",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304382217_422996202",
+      "id": "paragraph_1614304382217_422996202",
+      "dateCreated": "2021-02-26 09:53:02.217",
+      "dateStarted": "2021-02-26 12:31:29.274",
+      "dateFinished": "2021-02-26 12:31:30.037",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\nDROP VIEW IF EXISTS server_logs_window_1m;\n\nCREATE VIEW server_logs_window_1m AS \nSELECT  \n  TUMBLE_START(log_time, INTERVAL \u00271\u0027 MINUTE) AS window_start,\n  TUMBLE_ROWTIME(log_time, INTERVAL \u00271\u0027 MINUTE) AS window_end,\n  SUM(size) AS total_size,\n  COUNT(*) AS num_requests\nFROM server_logs\nGROUP BY \n  TUMBLE(log_time, INTERVAL \u00271\u0027 MINUTE);\n\n\nDROP VIEW IF EXISTS server_logs_window_5m;\n\nCREATE VIEW server_logs_window_5m AS \nSELECT \n  TUMBLE_START(window_end, INTERVAL \u00275\u0027 MINUTE) AS window_start,\n  TUMBLE_ROWTIME(window_end, INTERVAL \u00275\u0027 MINUTE) AS window_end,\n  SUM(total_size) AS total_size,\n  SUM(num_requests) AS num_requests\nFROM server_logs_window_1m\nGROUP BY \n  TUMBLE(window_end, INTERVAL \u00275\u0027 MINUTE);\n  ",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 12:31:37.435",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304436053_2145075386",
+      "id": "paragraph_1614304436053_2145075386",
+      "dateCreated": "2021-02-26 09:53:56.053",
+      "dateStarted": "2021-02-26 12:31:33.468",
+      "dateFinished": "2021-02-26 12:31:34.302",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql(runAsOne\u003dtrue)\n\nINSERT INTO avg_request_size_1m SELECT\n  window_start,\n  window_end, \n  total_size/num_requests AS avg_size\nFROM server_logs_window_1m;\n\nINSERT INTO avg_request_size_5m SELECT\n  window_start,\n  window_end, \n  total_size/num_requests AS avg_size\nFROM server_logs_window_5m;\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 12:31:41.628",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "http://localhost:8081#/job/c34cc9fab06d3a9be8ad7646c1c60161"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304458895_529580474",
+      "id": "paragraph_1614304458895_529580474",
+      "dateCreated": "2021-02-26 09:54:18.895",
+      "dateStarted": "2021-02-26 12:31:41.644",
+      "dateFinished": "2021-02-26 09:58:50.244",
+      "status": "ABORT"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 09:57:03.613",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304623613_747935414",
+      "id": "paragraph_1614304623613_747935414",
+      "dateCreated": "2021-02-26 09:57:03.613",
+      "status": "READY"
+    }
+  ],
+  "name": "07 Chained (Event) Time Windows",
+  "id": "2FZ88A3H2",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.10.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "flink-shared_process": [
+      {
+        "name": "duration",
+        "object": "1 hours 3 minutes 47 seconds",
+        "noteId": "2FZ88A3H2",
+        "paragraphId": "paragraph_1614304458895_529580474"
+      }
+    ]
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

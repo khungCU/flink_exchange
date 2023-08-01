@@ -1,0 +1,183 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n\u003e :bulb: This example will show how you can enrich a stream with an external table of reference data (i.e. a _lookup_ table).\n\n## Data Enrichment\n\nNot all data changes frequently, even when working in real-time: in some cases, you might need to enrich streaming data with static — or _reference_ — data that is stored externally. For example, `user` metadata may be stored in a relational database that Flink needs to join against directly.\nFlink SQL allows you to look up reference data and join it with a stream using a _lookup join_. The join requires one table to have a [processing time attribute](https://docs.ververica.com/user_guide/sql_development/table_view.html#processing-time-attributes) and the other table to be backed by a [lookup source connector](https://docs.ververica.com/user_guide/sql_development/connectors.html#id1), like the JDBC connector.\n\n## Using Lookup Joins\n\nIn this example, you will look up reference user data stored in MySQL to flag subscription events for users that are minors (`age \u003c 18`). The `FOR SYSTEM_TIME AS OF` clause uses the processing time attribute to ensure that each row of the `subscriptions` table is joined with the `users` rows that match the join predicate at the point in time when the `subscriptions` row is processed by the join operator. The lookup join also requires an equality join predicate based on the `PRIMARY KEY` of the lookup table (`usub.user_id \u003d u.user_id`). Here, the source does not have to read the entire table and can lazily fetch individual values from the external table when necessary.\n\n## Script\n\nThe source table (`subscriptions`) is backed by the [`faker` connector](https://github.com/knaufk/flink-faker), which continuously generates rows in memory based on Java Faker expressions. The `users` table is backed by an existing MySQL reference table using the [JDBC connector](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/jdbc.html).\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-08 22:58:34.507",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n\u003cp\u003e💡 This example will show how you can enrich a stream with an external table of reference data (i.e. a \u003cem\u003elookup\u003c/em\u003e table).\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2\u003eData Enrichment\u003c/h2\u003e\n\u003cp\u003eNot all data changes frequently, even when working in real-time: in some cases, you might need to enrich streaming data with static — or \u003cem\u003ereference\u003c/em\u003e — data that is stored externally. For example, \u003ccode\u003euser\u003c/code\u003e metadata may be stored in a relational database that Flink needs to join against directly.\u003cbr /\u003e\nFlink SQL allows you to look up reference data and join it with a stream using a \u003cem\u003elookup join\u003c/em\u003e. The join requires one table to have a \u003ca href\u003d\"https://docs.ververica.com/user_guide/sql_development/table_view.html#processing-time-attributes\"\u003eprocessing time attribute\u003c/a\u003e and the other table to be backed by a \u003ca href\u003d\"https://docs.ververica.com/user_guide/sql_development/connectors.html#id1\"\u003elookup source connector\u003c/a\u003e, like the JDBC connector.\u003c/p\u003e\n\u003ch2\u003eUsing Lookup Joins\u003c/h2\u003e\n\u003cp\u003eIn this example, you will look up reference user data stored in MySQL to flag subscription events for users that are minors (\u003ccode\u003eage \u0026lt; 18\u003c/code\u003e). The \u003ccode\u003eFOR SYSTEM_TIME AS OF\u003c/code\u003e clause uses the processing time attribute to ensure that each row of the \u003ccode\u003esubscriptions\u003c/code\u003e table is joined with the \u003ccode\u003eusers\u003c/code\u003e rows that match the join predicate at the point in time when the \u003ccode\u003esubscriptions\u003c/code\u003e row is processed by the join operator. The lookup join also requires an equality join predicate based on the \u003ccode\u003ePRIMARY KEY\u003c/code\u003e of the lookup table (\u003ccode\u003eusub.user_id \u003d u.user_id\u003c/code\u003e). Here, the source does not have to read the entire table and can lazily fetch individual values from the external table when necessary.\u003c/p\u003e\n\u003ch2\u003eScript\u003c/h2\u003e\n\u003cp\u003eThe source table (\u003ccode\u003esubscriptions\u003c/code\u003e) is backed by the \u003ca href\u003d\"https://github.com/knaufk/flink-faker\"\u003e\u003ccode\u003efaker\u003c/code\u003e connector\u003c/a\u003e, which continuously generates rows in memory based on Java Faker expressions. The \u003ccode\u003eusers\u003c/code\u003e table is backed by an existing MySQL reference table using the \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/jdbc.html\"\u003eJDBC connector\u003c/a\u003e.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614316800709_621606447",
+      "id": "paragraph_1614316800709_621606447",
+      "dateCreated": "2021-02-26 13:20:00.710",
+      "dateStarted": "2021-10-08 22:58:34.509",
+      "dateFinished": "2021-10-08 22:58:34.515",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n本文将展示如何使用外部表中的 reference 数据来充实(enrich)一个流(即 _lookup_ 表)。\n\n## 数据充实（data enrichment）\n\n即使在实时场景下，也并不是所有的数据都频繁的改变：在一些场景中，我们可能会需要使用储存在外部的静态或者  _reference_ 数据来扩展一个流。例如，`user`表的元信息可能储存在关系型数据库中，Flink 需要直接 join 这个表。\nFLINK SQL 允许我们查询reference数据，并使用 _lookup join_ 来将它与一个流 join。这个 join 操作需要一个表有 [processing time attribute](https://docs.ververica.com/user_guide/sql_development/table_view.html#processing-time-attributes) 另一个表使用像 JDBC connector 这样的 [lookup source connector](https://docs.ververica.com/user_guide/sql_development/connectors.html#id1) 来提供数据。\n\n## 使用 Loopup Joins\n\n在这个例子中，我们使用储存在 MYSQL 中的用户 reference 数据来标记未成年用户 (`age \u003c 18`).  `FOR SYSTEM_TIME AS OF` 语句使用处理时间属性来确保 `subscriptions` 表的每一个行在join操作处理这个 `subscriptions` 行的时间点与  `users` 表中  `users` 记录连接。lookup join 也需要一个 基于 lookup 表 `PRIMARY KEY` 的 相等 join 谓词 (`usub.user_id \u003d u.user_id`). 这里，数据源不需要读取整个表，可以在需要的时候从外部表中获取各自需要的值。\n\n\n## 脚本\n\n数据源 `subscriptions` 表使用 [`faker` connector](https://github.com/knaufk/flink-faker) 提供数据，它可以基于 Java Faker 表达式持续的在内存中生成数据。`users` 表使用  [JDBC connector](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/jdbc.html) 从一个已存在的 MYSQL reference 表中获取数据。\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-18 15:57:00.333",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e本文将展示如何使用外部表中的 reference 数据来充实(enrich)一个流(即 \u003cem\u003elookup\u003c/em\u003e 表)。\u003c/p\u003e\n\u003ch2\u003e数据充实（data enrichment）\u003c/h2\u003e\n\u003cp\u003e即使在实时场景下，也并不是所有的数据都频繁的改变：在一些场景中，我们可能会需要使用储存在外部的静态或者  \u003cem\u003ereference\u003c/em\u003e 数据来扩展一个流。例如，\u003ccode\u003euser\u003c/code\u003e表的元信息可能储存在关系型数据库中，Flink 需要直接 join 这个表。\u003cbr /\u003e\nFLINK SQL 允许我们查询reference数据，并使用 \u003cem\u003elookup join\u003c/em\u003e 来将它与一个流 join。这个 join 操作需要一个表有 \u003ca href\u003d\"https://docs.ververica.com/user_guide/sql_development/table_view.html#processing-time-attributes\"\u003eprocessing time attribute\u003c/a\u003e 另一个表使用像 JDBC connector 这样的 \u003ca href\u003d\"https://docs.ververica.com/user_guide/sql_development/connectors.html#id1\"\u003elookup source connector\u003c/a\u003e 来提供数据。\u003c/p\u003e\n\u003ch2\u003e使用 Loopup Joins\u003c/h2\u003e\n\u003cp\u003e在这个例子中，我们使用储存在 MYSQL 中的用户 reference 数据来标记未成年用户 (\u003ccode\u003eage \u0026lt; 18\u003c/code\u003e).  \u003ccode\u003eFOR SYSTEM_TIME AS OF\u003c/code\u003e 语句使用处理时间属性来确保 \u003ccode\u003esubscriptions\u003c/code\u003e 表的每一个行在join操作处理这个 \u003ccode\u003esubscriptions\u003c/code\u003e 行的时间点与  \u003ccode\u003eusers\u003c/code\u003e 表中  \u003ccode\u003eusers\u003c/code\u003e 记录连接。lookup join 也需要一个 基于 lookup 表 \u003ccode\u003ePRIMARY KEY\u003c/code\u003e 的 相等 join 谓词 (\u003ccode\u003eusub.user_id \u003d u.user_id\u003c/code\u003e). 这里，数据源不需要读取整个表，可以在需要的时候从外部表中获取各自需要的值。\u003c/p\u003e\n\u003ch2\u003e脚本\u003c/h2\u003e\n\u003cp\u003e数据源 \u003ccode\u003esubscriptions\u003c/code\u003e 表使用 \u003ca href\u003d\"https://github.com/knaufk/flink-faker\"\u003e\u003ccode\u003efaker\u003c/code\u003e connector\u003c/a\u003e 提供数据，它可以基于 Java Faker 表达式持续的在内存中生成数据。\u003ccode\u003eusers\u003c/code\u003e 表使用  \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/jdbc.html\"\u003eJDBC connector\u003c/a\u003e 从一个已存在的 MYSQL reference 表中获取数据。\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615520569624_169709885",
+      "id": "paragraph_1615520569624_169709885",
+      "dateCreated": "2021-03-12 03:42:49.625",
+      "dateStarted": "2021-03-18 15:57:00.333",
+      "dateFinished": "2021-03-18 15:57:00.348",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\nDROP TABLE IF EXISTS subscriptions;\n\nCREATE TABLE subscriptions ( \n    id STRING,\n    user_id INT,\n    type STRING,\n    start_date TIMESTAMP(3),\n    end_date TIMESTAMP(3),\n    payment_expiration TIMESTAMP(3),\n    proc_time AS PROCTIME()\n) WITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027,\n  \u0027fields.id.expression\u0027 \u003d \u0027#{Internet.uuid}\u0027, \n  \u0027fields.user_id.expression\u0027 \u003d \u0027#{number.numberBetween \u0027\u00271\u0027\u0027,\u0027\u002750\u0027\u0027}\u0027,\n  \u0027fields.type.expression\u0027\u003d \u0027#{regexify \u0027\u0027(basic|premium|platinum){1}\u0027\u0027}\u0027,\n  \u0027fields.start_date.expression\u0027 \u003d \u0027#{date.past \u0027\u002730\u0027\u0027,\u0027\u0027DAYS\u0027\u0027}\u0027,\n  \u0027fields.end_date.expression\u0027 \u003d \u0027#{date.future \u0027\u0027365\u0027\u0027,\u0027\u0027DAYS\u0027\u0027}\u0027,\n  \u0027fields.payment_expiration.expression\u0027 \u003d \u0027#{date.future \u0027\u0027365\u0027\u0027,\u0027\u0027DAYS\u0027\u0027}\u0027\n);\n\nDROP TABLE IF EXISTS users;\n\nCREATE TABLE users (\n user_id INT PRIMARY KEY,\n user_name VARCHAR(255) NOT NULL, \n age INT NOT NULL\n)\nWITH (\n  \u0027connector\u0027 \u003d \u0027jdbc\u0027, \n  \u0027url\u0027 \u003d \u0027jdbc:mysql://localhost:3306/mysql-database\u0027, \n  \u0027table-name\u0027 \u003d \u0027users\u0027, \n  \u0027username\u0027 \u003d \u0027mysql-user\u0027, \n  \u0027password\u0027 \u003d \u0027mysql-password\u0027\n);",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 10:13:13.775",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614305528439_1240137011",
+      "id": "paragraph_1614305528439_1240137011",
+      "dateCreated": "2021-02-26 10:12:08.439",
+      "dateStarted": "2021-02-26 10:13:13.787",
+      "dateFinished": "2021-02-26 10:13:14.718",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql(type\u003dupdate)\n\nSELECT \n  id AS subscription_id,\n  type AS subscription_type,\n  age AS user_age,\n  CASE \n    WHEN age \u003c 18 THEN 1\n    ELSE 0\n  END AS is_minor\nFROM subscriptions usub\nJOIN users FOR SYSTEM_TIME AS OF usub.proc_time AS u\n  ON usub.user_id \u003d u.user_id;\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 10:13:21.804",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614305593778_1681665940",
+      "id": "paragraph_1614305593778_1681665940",
+      "dateCreated": "2021-02-26 10:13:13.779",
+      "dateStarted": "2021-02-26 10:13:21.809",
+      "dateFinished": "2021-02-26 10:13:22.703",
+      "status": "ERROR"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 10:13:21.807",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614305601807_1982709287",
+      "id": "paragraph_1614305601807_1982709287",
+      "dateCreated": "2021-02-26 10:13:21.807",
+      "status": "READY"
+    }
+  ],
+  "name": "04 Lookup Joins",
+  "id": "2FYWYEW8C",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.10.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

@@ -1,0 +1,227 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n\u003e :bulb: This example will show how you can perform joins between tables with events that are related in a temporal context.\n\n## Why Interval Joins?\n\nIn a previous recipe, you learned about using _regular joins_ in Flink SQL. This kind of join works well for some scenarios, but for others a more efficient type of join is required to keep resource utilization from growing indefinitely.\n\nOne of the ways to optimize joining operations in Flink SQL is to use [_interval joins_](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/streaming/joins.html#interval-joins). An interval join is defined by a join predicate that checks if the time attributes of the input events are within certain time constraints (i.e. a time window).\n\n## Using Interval Joins\n\nSuppose you want to join events of two tables that correlate to each other in the [order fulfillment lifecycle](https://en.wikipedia.org/wiki/Order_fulfillment) (`orders` and `shipments`) and that are under a Service-level Aggreement (SLA) Service-level Aggreement (SLA) of **3 days**. To reduce the amount of input rows Flink has to retain and optimize the join operation, you can define a time constraint in the `WHERE` clause to bound the time on both sides to that specific interval using a `BETWEEN` predicate.\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-08 22:56:58.356",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n\u003cp\u003e💡 This example will show how you can perform joins between tables with events that are related in a temporal context.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2\u003eWhy Interval Joins?\u003c/h2\u003e\n\u003cp\u003eIn a previous recipe, you learned about using \u003cem\u003eregular joins\u003c/em\u003e in Flink SQL. This kind of join works well for some scenarios, but for others a more efficient type of join is required to keep resource utilization from growing indefinitely.\u003c/p\u003e\n\u003cp\u003eOne of the ways to optimize joining operations in Flink SQL is to use \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/streaming/joins.html#interval-joins\"\u003e\u003cem\u003einterval joins\u003c/em\u003e\u003c/a\u003e. An interval join is defined by a join predicate that checks if the time attributes of the input events are within certain time constraints (i.e. a time window).\u003c/p\u003e\n\u003ch2\u003eUsing Interval Joins\u003c/h2\u003e\n\u003cp\u003eSuppose you want to join events of two tables that correlate to each other in the \u003ca href\u003d\"https://en.wikipedia.org/wiki/Order_fulfillment\"\u003eorder fulfillment lifecycle\u003c/a\u003e (\u003ccode\u003eorders\u003c/code\u003e and \u003ccode\u003eshipments\u003c/code\u003e) and that are under a Service-level Aggreement (SLA) Service-level Aggreement (SLA) of \u003cstrong\u003e3 days\u003c/strong\u003e. To reduce the amount of input rows Flink has to retain and optimize the join operation, you can define a time constraint in the \u003ccode\u003eWHERE\u003c/code\u003e clause to bound the time on both sides to that specific interval using a \u003ccode\u003eBETWEEN\u003c/code\u003e predicate.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614316707292_565283423",
+      "id": "paragraph_1614316707292_565283423",
+      "dateCreated": "2021-02-26 13:18:27.292",
+      "dateStarted": "2021-10-08 22:56:58.357",
+      "dateFinished": "2021-10-08 22:56:58.363",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n本例将展示如果对时间上下文相关联的事件表执行连接操作。\n\n## 为什么使用 Interval Joins？\n在之前的例子中，我们已经学习了使用 Flink SQL 的 _regular joins_。这种类型的join适合某个场景，但是有些场景下需要一个更有效的连接类型以防止资源利用无限增长。\n\nFLink SQL 中其中一个优化连接操作的方式是使用 [_interval joins_](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/streaming/joins.html#interval-joins)。interval join(事件区间连接) 使用连接 predicate 定义用来检查输入的事件的事件属性是否在一个固定的时间约束内（即时间窗口）.\n\n## 使用 Interval Joins\n\n假设你希望连接2张在 [order fulfillment lifecycle](https://en.wikipedia.org/wiki/Order_fulfillment) (`orders` and `shipments`) 中互相联系的表的事件。并且具有 **3 天** 的 服务级别协定 (SLA)。为了减少Flink要保留的输入行的数量以及优化join操作，我们可以定义一个时间约束在  `WHERE` 语句中来将两边的数据限定在使用 `BETWEEN` 表述的特定时间区间内。\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-18 15:56:15.693",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e本例将展示如果对时间上下文相关联的事件表执行连接操作。\u003c/p\u003e\n\u003ch2\u003e为什么使用 Interval Joins？\u003c/h2\u003e\n\u003cp\u003e在之前的例子中，我们已经学习了使用 Flink SQL 的 \u003cem\u003eregular joins\u003c/em\u003e。这种类型的join适合某个场景，但是有些场景下需要一个更有效的连接类型以防止资源利用无限增长。\u003c/p\u003e\n\u003cp\u003eFLink SQL 中其中一个优化连接操作的方式是使用 \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/streaming/joins.html#interval-joins\"\u003e\u003cem\u003einterval joins\u003c/em\u003e\u003c/a\u003e。interval join(事件区间连接) 使用连接 predicate 定义用来检查输入的事件的事件属性是否在一个固定的时间约束内（即时间窗口）.\u003c/p\u003e\n\u003ch2\u003e使用 Interval Joins\u003c/h2\u003e\n\u003cp\u003e假设你希望连接2张在 \u003ca href\u003d\"https://en.wikipedia.org/wiki/Order_fulfillment\"\u003eorder fulfillment lifecycle\u003c/a\u003e (\u003ccode\u003eorders\u003c/code\u003e and \u003ccode\u003eshipments\u003c/code\u003e) 中互相联系的表的事件。并且具有 \u003cstrong\u003e3 天\u003c/strong\u003e 的 服务级别协定 (SLA)。为了减少Flink要保留的输入行的数量以及优化join操作，我们可以定义一个时间约束在  \u003ccode\u003eWHERE\u003c/code\u003e 语句中来将两边的数据限定在使用 \u003ccode\u003eBETWEEN\u003c/code\u003e 表述的特定时间区间内。\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615187074212_175017653",
+      "id": "paragraph_1615187074212_175017653",
+      "dateCreated": "2021-03-08 07:04:34.213",
+      "dateStarted": "2021-03-18 15:56:15.694",
+      "dateFinished": "2021-03-18 15:56:15.707",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\nDROP TABLE IF EXISTS orders;\n\nCREATE TABLE orders (\n  id INT,\n  order_time AS TIMESTAMPADD(DAY, CAST(FLOOR(RAND()*(1-5+1)+5)*(-1) AS INT), CURRENT_TIMESTAMP)\n)\nWITH (\n  \u0027connector\u0027 \u003d \u0027datagen\u0027,\n  \u0027rows-per-second\u0027\u003d\u002710\u0027,\n  \u0027fields.id.kind\u0027\u003d\u0027sequence\u0027,\n  \u0027fields.id.start\u0027\u003d\u00271\u0027,\n  \u0027fields.id.end\u0027\u003d\u00271000\u0027\n);\n\nDROP TABLE IF EXISTS shipments;\n\nCREATE TABLE shipments (\n  id INT,\n  order_id INT,\n  shipment_time AS TIMESTAMPADD(DAY, CAST(FLOOR(RAND()*(1-5+1)) AS INT), CURRENT_TIMESTAMP)\n)\nWITH (\n  \u0027connector\u0027 \u003d \u0027datagen\u0027,\n  \u0027rows-per-second\u0027\u003d\u00275\u0027,\n  \u0027fields.id.kind\u0027\u003d\u0027random\u0027,\n  \u0027fields.id.min\u0027\u003d\u00270\u0027,\n  \u0027fields.order_id.kind\u0027\u003d\u0027sequence\u0027,\n  \u0027fields.order_id.start\u0027\u003d\u00271\u0027,\n  \u0027fields.order_id.end\u0027\u003d\u00271000\u0027\n);\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 10:08:43.655",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614305279491_945824539",
+      "id": "paragraph_1614305279491_945824539",
+      "dateCreated": "2021-02-26 10:07:59.491",
+      "dateStarted": "2021-02-26 10:08:43.664",
+      "dateFinished": "2021-02-26 10:08:44.705",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql(type\u003dupdate)\n\nSELECT\n  o.id AS order_id,\n  o.order_time,\n  s.shipment_time,\n  TIMESTAMPDIFF(DAY,o.order_time,s.shipment_time) AS day_diff\nFROM orders o\nJOIN shipments s ON o.id \u003d s.order_id\nWHERE \n    o.order_time BETWEEN s.shipment_time - INTERVAL \u00273\u0027 DAY AND s.shipment_time\nORDER BY order_time DESC\nLIMIT 10;\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 13:18:26.703",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "order_id": "string",
+                      "order_time": "string",
+                      "shipment_time": "string",
+                      "day_diff": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "http://localhost:8081#/job/86a3dc8e59db03052aa439a29a4eba23"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614305302690_1560304565",
+      "id": "paragraph_1614305302690_1560304565",
+      "dateCreated": "2021-02-26 10:08:22.690",
+      "dateStarted": "2021-02-26 10:10:38.764",
+      "dateFinished": "2021-02-26 10:10:51.156",
+      "status": "ABORT"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 10:09:02.042",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614305342041_1071723300",
+      "id": "paragraph_1614305342041_1071723300",
+      "dateCreated": "2021-02-26 10:09:02.042",
+      "status": "READY"
+    }
+  ],
+  "name": "02 Interval Joins",
+  "id": "2FYMBTGSF",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.10.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

@@ -1,0 +1,183 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n\u003e :bulb: In this recipe, we will de-normalize a simple star schema with an n-way temporal table join. \t \n\n[Star schemas](https://en.wikipedia.org/wiki/Star_schema) are a popular way of normalizing data within a data warehouse. At the center of a star schema is a **fact table** whose rows contain metrics, measurements, and other facts about the world. Surrounding fact tables are one or more **dimension tables** which have metadata useful for enriching facts when computing queries.  \nYou are running a small data warehouse for a railroad company which consists of a fact table (`train_activity`) and three dimension tables (`stations`, `booking_channels`, and `passengers`). All inserts to the fact table, and all updates to the dimension tables, are mirrored to Apache Kafka. Records in the fact table are interpreted as inserts only, and so the table is backed by the [standard Kafka connector](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/kafka.html) (`connector` \u003d `kafka`);. In contrast, the records in the dimensional tables are upserts based on a primary key, which requires the [Upsert Kafka connector](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/upsert-kafka.html) (`connector` \u003d `upsert-kafka`).\t \n\nWith Flink SQL you can now easily join all dimensions to our fact table using a 5-way temporal table join. Temporal table joins take an arbitrary table (left input/probe site) and correlate each row to the corresponding row’s relevant version in a versioned table (right input/build side). Flink uses the SQL syntax of ``FOR SYSTEM_TIME AS OF`` to perform this operation. Using a temporal table join leads to consistent, reproducible results when joining a fact table with more (slowly) changing dimensional tables. Every event (row in the fact table) is joined to its corresponding value of each dimension based on when the event occurred in the real world. \n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-08 22:59:14.588",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n\u003cp\u003e💡 In this recipe, we will de-normalize a simple star schema with an n-way temporal table join.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e\u003ca href\u003d\"https://en.wikipedia.org/wiki/Star_schema\"\u003eStar schemas\u003c/a\u003e are a popular way of normalizing data within a data warehouse. At the center of a star schema is a \u003cstrong\u003efact table\u003c/strong\u003e whose rows contain metrics, measurements, and other facts about the world. Surrounding fact tables are one or more \u003cstrong\u003edimension tables\u003c/strong\u003e which have metadata useful for enriching facts when computing queries.\u003cbr /\u003e\nYou are running a small data warehouse for a railroad company which consists of a fact table (\u003ccode\u003etrain_activity\u003c/code\u003e) and three dimension tables (\u003ccode\u003estations\u003c/code\u003e, \u003ccode\u003ebooking_channels\u003c/code\u003e, and \u003ccode\u003epassengers\u003c/code\u003e). All inserts to the fact table, and all updates to the dimension tables, are mirrored to Apache Kafka. Records in the fact table are interpreted as inserts only, and so the table is backed by the \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/kafka.html\"\u003estandard Kafka connector\u003c/a\u003e (\u003ccode\u003econnector\u003c/code\u003e \u003d \u003ccode\u003ekafka\u003c/code\u003e);. In contrast, the records in the dimensional tables are upserts based on a primary key, which requires the \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/upsert-kafka.html\"\u003eUpsert Kafka connector\u003c/a\u003e (\u003ccode\u003econnector\u003c/code\u003e \u003d \u003ccode\u003eupsert-kafka\u003c/code\u003e).\u003c/p\u003e\n\u003cp\u003eWith Flink SQL you can now easily join all dimensions to our fact table using a 5-way temporal table join. Temporal table joins take an arbitrary table (left input/probe site) and correlate each row to the corresponding row’s relevant version in a versioned table (right input/build side). Flink uses the SQL syntax of \u003ccode\u003eFOR SYSTEM_TIME AS OF\u003c/code\u003e to perform this operation. Using a temporal table join leads to consistent, reproducible results when joining a fact table with more (slowly) changing dimensional tables. Every event (row in the fact table) is joined to its corresponding value of each dimension based on when the event occurred in the real world.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614305636615_1009654891",
+      "id": "paragraph_1614305636615_1009654891",
+      "dateCreated": "2021-02-26 10:13:56.615",
+      "dateStarted": "2021-10-08 22:59:14.588",
+      "dateFinished": "2021-10-08 22:59:14.593",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n \n在本例中，我们将使用 n-way temporal table join 来 de-normalize 一个简单的星座模型。\n\n[Star schemas](https://en.wikipedia.org/wiki/Star_schema) 是一个流行的在数据仓库中 normalizing 数据的方式。星座模型的中心是含有指标、度量和其他关于世界的事实的  **fact table**(事实表)。\n\n围绕事实表的是一张或者多张 **dimension tables**(维度表)，维度表的元数据在查询计算时是对事实表的扩展。\n\n你在一个小型的铁路公司运行了小型数据仓库，它包含一张事实表 (`train_activity`) 和3张 维度表 (`stations`, `booking_channels`, and `passengers`)。所有对事实表的插入和对维度表的更新都镜像到 Apache Kafka 中。事实表中的记录表示为只插入，所以它使用 [standard Kafka connector](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/kafka.html) (`connector` \u003d `kafka`) 提供数据。相反，维度表的记录基于主键更新或者插入，它需要 [Upsert Kafka connector](https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/upsert-kafka.html) (`connector` \u003d `upsert-kafka`)。\n\n通过 Flink SQL 使用 5-way temporal 表连接， 你可以轻易的将所有的维度表连接到事实表上。Temporal table joins 采用任意一张表(左边 输入/探针 地址)，将每一行记录与版本表（右边 输入/构建 侧）中对应行记录的相关版本关联。使用 `FOR SYSTEM_TIME AS OF` SQL 语法来执行这个操作。当将事实表与多个缓慢变化的维度表连接是使用一个 temporal table join 将产出一致的、可复现的结果。 每个事件(事实表中的一行)与每个维度表基于事件在真实世界发送的事件来连接对应的值。\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-18 15:57:11.460",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e在本例中，我们将使用 n-way temporal table join 来 de-normalize 一个简单的星座模型。\u003c/p\u003e\n\u003cp\u003e\u003ca href\u003d\"https://en.wikipedia.org/wiki/Star_schema\"\u003eStar schemas\u003c/a\u003e 是一个流行的在数据仓库中 normalizing 数据的方式。星座模型的中心是含有指标、度量和其他关于世界的事实的  \u003cstrong\u003efact table\u003c/strong\u003e(事实表)。\u003c/p\u003e\n\u003cp\u003e围绕事实表的是一张或者多张 \u003cstrong\u003edimension tables\u003c/strong\u003e(维度表)，维度表的元数据在查询计算时是对事实表的扩展。\u003c/p\u003e\n\u003cp\u003e你在一个小型的铁路公司运行了小型数据仓库，它包含一张事实表 (\u003ccode\u003etrain_activity\u003c/code\u003e) 和3张 维度表 (\u003ccode\u003estations\u003c/code\u003e, \u003ccode\u003ebooking_channels\u003c/code\u003e, and \u003ccode\u003epassengers\u003c/code\u003e)。所有对事实表的插入和对维度表的更新都镜像到 Apache Kafka 中。事实表中的记录表示为只插入，所以它使用 \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/kafka.html\"\u003estandard Kafka connector\u003c/a\u003e (\u003ccode\u003econnector\u003c/code\u003e \u003d \u003ccode\u003ekafka\u003c/code\u003e) 提供数据。相反，维度表的记录基于主键更新或者插入，它需要 \u003ca href\u003d\"https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/connectors/upsert-kafka.html\"\u003eUpsert Kafka connector\u003c/a\u003e (\u003ccode\u003econnector\u003c/code\u003e \u003d \u003ccode\u003eupsert-kafka\u003c/code\u003e)。\u003c/p\u003e\n\u003cp\u003e通过 Flink SQL 使用 5-way temporal 表连接， 你可以轻易的将所有的维度表连接到事实表上。Temporal table joins 采用任意一张表(左边 输入/探针 地址)，将每一行记录与版本表（右边 输入/构建 侧）中对应行记录的相关版本关联。使用 \u003ccode\u003eFOR SYSTEM_TIME AS OF\u003c/code\u003e SQL 语法来执行这个操作。当将事实表与多个缓慢变化的维度表连接是使用一个 temporal table join 将产出一致的、可复现的结果。 每个事件(事实表中的一行)与每个维度表基于事件在真实世界发送的事件来连接对应的值。\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615523318129_1784896943",
+      "id": "paragraph_1615523318129_1784896943",
+      "dateCreated": "2021-03-12 04:28:38.129",
+      "dateStarted": "2021-03-18 15:57:11.460",
+      "dateFinished": "2021-03-18 15:57:11.471",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\n\nDROP TABLE IF EXISTS passengers;\n\nCREATE TABLE passengers (\n  passenger_key STRING, \n  first_name STRING, \n  last_name STRING,\n  update_time TIMESTAMP(3),\n  WATERMARK FOR update_time AS update_time - INTERVAL \u002710\u0027 SECONDS,\n  PRIMARY KEY (passenger_key) NOT ENFORCED\n) WITH (\n  \u0027connector\u0027 \u003d \u0027upsert-kafka\u0027,\n  \u0027topic\u0027 \u003d \u0027passengers\u0027,\n  \u0027properties.bootstrap.servers\u0027 \u003d \u0027localhost:9092\u0027,\n  \u0027key.format\u0027 \u003d \u0027raw\u0027,\n  \u0027value.format\u0027 \u003d \u0027json\u0027\n);\n\nDROP TABLE IF EXISTS stations;\n\nCREATE TABLE stations (\n  station_key STRING, \n  update_time TIMESTAMP(3),\n  city STRING,\n  WATERMARK FOR update_time AS update_time - INTERVAL \u002710\u0027 SECONDS,\n  PRIMARY KEY (station_key) NOT ENFORCED\n) WITH (\n  \u0027connector\u0027 \u003d \u0027upsert-kafka\u0027,\n  \u0027topic\u0027 \u003d \u0027stations\u0027,\n  \u0027properties.bootstrap.servers\u0027 \u003d \u0027localhost:9092\u0027,\n  \u0027key.format\u0027 \u003d \u0027raw\u0027,\n  \u0027value.format\u0027 \u003d \u0027json\u0027\n);\n\nDROP TABLE IF EXISTS booking_channels;\n\nCREATE TABLE booking_channels (\n  booking_channel_key STRING, \n  update_time TIMESTAMP(3),\n  channel STRING,\n  WATERMARK FOR update_time AS update_time - INTERVAL \u002710\u0027 SECONDS,\n  PRIMARY KEY (booking_channel_key) NOT ENFORCED\n) WITH (\n  \u0027connector\u0027 \u003d \u0027upsert-kafka\u0027,\n  \u0027topic\u0027 \u003d \u0027booking_channels\u0027,\n  \u0027properties.bootstrap.servers\u0027 \u003d \u0027localhost:9092\u0027,\n  \u0027key.format\u0027 \u003d \u0027raw\u0027,\n  \u0027value.format\u0027 \u003d \u0027json\u0027\n);\n\nDROP TABLE IF EXISTS train_activities;\n\nCREATE TABLE train_activities (\n  scheduled_departure_time TIMESTAMP(3),\n  actual_departure_date TIMESTAMP(3),\n  passenger_key STRING, \n  origin_station_key STRING, \n  destination_station_key STRING,\n  booking_channel_key STRING,\n  WATERMARK FOR actual_departure_date AS actual_departure_date - INTERVAL \u002710\u0027 SECONDS\n) WITH (\n  \u0027connector\u0027 \u003d \u0027kafka\u0027,\n  \u0027topic\u0027 \u003d \u0027train_activities\u0027,\n  \u0027properties.bootstrap.servers\u0027 \u003d \u0027localhost:9092\u0027,\n  \u0027value.format\u0027 \u003d \u0027json\u0027,\n  \u0027value.fields-include\u0027 \u003d \u0027ALL\u0027\n);\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-27 15:20:14.742",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614316870006_1898527227",
+      "id": "paragraph_1614316870006_1898527227",
+      "dateCreated": "2021-02-26 13:21:10.006",
+      "dateStarted": "2021-02-27 15:20:14.746",
+      "dateFinished": "2021-02-27 15:20:15.750",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql(type\u003dupdate)\n\nSELECT \n  t.actual_departure_date, \n  p.first_name,\n  p.last_name,\n  b.channel, \n  os.city AS origin_station,\n  ds.city AS destination_station\nFROM train_activities t\nLEFT JOIN booking_channels FOR SYSTEM_TIME AS OF t.actual_departure_date AS b \nON t.booking_channel_key \u003d b.booking_channel_key;\nLEFT JOIN passengers FOR SYSTEM_TIME AS OF t.actual_departure_date AS p\nON t.passenger_key \u003d p.passenger_key\nLEFT JOIN stations FOR SYSTEM_TIME AS OF t.actual_departure_date AS os\nON t.origin_station_key \u003d os.station_key\nLEFT JOIN stations FOR SYSTEM_TIME AS OF t.actual_departure_date AS ds\nON t.destination_station_key \u003d ds.station_key\nORDER BY t.actual_departure_date DESC\nLIMIT 10;\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-27 15:21:03.980",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614410414745_969940744",
+      "id": "paragraph_1614410414745_969940744",
+      "dateCreated": "2021-02-27 15:20:14.745",
+      "dateStarted": "2021-02-27 15:21:03.984",
+      "dateFinished": "2021-02-27 15:21:04.881",
+      "status": "ERROR"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-27 15:20:55.778",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614410455778_1166301104",
+      "id": "paragraph_1614410455778_1166301104",
+      "dateCreated": "2021-02-27 15:20:55.778",
+      "status": "READY"
+    }
+  ],
+  "name": "05 Real Time Star Schema Denormalization (N-Way Join)",
+  "id": "2G1ZCV2GP",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.10.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

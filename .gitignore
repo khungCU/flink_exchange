@@ -1,0 +1,7 @@
+.DS_Store
+LICENSE
+.metals
+.vscode
+flink-1.14.6/log/
+local-playground/flink-1.14.6
+local-playground/artifacts

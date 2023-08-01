@@ -1,0 +1,284 @@
+{
+  "paragraphs": [
+    {
+      "text": "%flink.ssql\n\n-- Create a source for table Shipment \nDROP TABLE shipments;\nCREATE TABLE shipments (\n   shipment_id INT,\n   order_id INT,\n   origin STRING,\n   destination STRING,\n   is_arrived BOOLEAN,\n   PRIMARY KEY (shipment_id) NOT ENFORCED\n ) WITH (\n   \u0027connector\u0027 \u003d \u0027postgres-cdc\u0027,\n   \u0027hostname\u0027 \u003d \u0027postgres\u0027,\n   \u0027port\u0027 \u003d \u00275432\u0027,\n   \u0027username\u0027 \u003d \u0027postgres\u0027,\n   \u0027password\u0027 \u003d \u0027postgres\u0027,\n   \u0027database-name\u0027 \u003d \u0027postgres\u0027,\n   \u0027schema-name\u0027 \u003d \u0027public\u0027,\n   \u0027table-name\u0027 \u003d \u0027shipments\u0027,\n   \u0027slot.name\u0027 \u003d \u0027test\u0027\n );",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-24 12:05:58.969",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689883010646_362171022",
+      "id": "paragraph_1689883010646_362171022",
+      "dateCreated": "2023-07-20 19:56:50.646",
+      "dateStarted": "2023-07-24 12:05:58.989",
+      "dateFinished": "2023-07-24 12:05:59.290",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql(type\u003dupdate)\nselect * from shipments;",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-24 12:06:01.987",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "shipment_id": "string",
+                      "order_id": "string",
+                      "origin": "string",
+                      "destination": "string",
+                      "is_arrived": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "shipment_id\torder_id\torigin\tdestination\tis_arrived\n1001\t10001\tBeijing\tShanghai\tfalse\n1002\t10002\tHangzhou\tShanghai\tfalse\n1003\t10003\tShanghai\tHangzhou\tfalse\n1004\t10004\tTaiwan\tTaipei\tfalse\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to run sql command: select * from shipments\njava.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:177)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:109)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:86)\n\tat org.apache.zeppelin.flink.FlinkSqlInterpreter.callSelect(FlinkSqlInterpreter.java:494)\n\tat org.apache.zeppelin.flink.FlinkSqlInterpreter.callCommand(FlinkSqlInterpreter.java:257)\n\tat org.apache.zeppelin.flink.FlinkSqlInterpreter.runSqlList(FlinkSqlInterpreter.java:151)\n\tat org.apache.zeppelin.flink.FlinkSqlInterpreter.internalInterpret(FlinkSqlInterpreter.java:109)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:55)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:860)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:752)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 6194f46501f90550f03fc1d8d34911ef)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:125)\n\tat java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:616)\n\tat java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:591)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.util.concurrent.FutureUtils.lambda$retryOperationWithDelay$9(FutureUtils.java:403)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$26(RestClusterClient.java:698)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.util.concurrent.FutureUtils.lambda$retryOperationWithDelay$9(FutureUtils.java:403)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:575)\n\tat java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:943)\n\tat java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:456)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobCancellationException: Job was cancelled.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:146)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:123)\n\t... 24 more\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "http://localhost:8081#/job/6194f46501f90550f03fc1d8d34911ef"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1690197903444_911807284",
+      "id": "paragraph_1690197903444_911807284",
+      "dateCreated": "2023-07-24 11:25:03.444",
+      "dateStarted": "2023-07-24 12:06:02.007",
+      "dateFinished": "2023-07-24 12:09:37.693",
+      "status": "ABORT"
+    },
+    {
+      "text": "%flink.ssql\n\n-- Create a source for table Order\n\n\nCREATE TABLE orders (\n   order_id INT,\n   order_date TIMESTAMP(0),\n   customer_name STRING,\n   price DECIMAL(10, 5),\n   product_id INT,\n   order_status BOOLEAN,\n   PRIMARY KEY (order_id) NOT ENFORCED\n ) WITH (\n   \u0027connector\u0027 \u003d \u0027postgres-cdc\u0027,\n   \u0027hostname\u0027 \u003d \u0027localhost\u0027,\n   \u0027port\u0027 \u003d \u00275432\u0027,\n   \u0027username\u0027 \u003d \u0027postgres\u0027,\n   \u0027password\u0027 \u003d \u0027postgres\u0027,\n   \u0027database-name\u0027 \u003d \u0027postgres\u0027,\n   \u0027schema-name\u0027 \u003d \u0027public\u0027,\n   \u0027table-name\u0027 \u003d \u0027orders\u0027\n );",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20 20:08:20.407",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689883015090_1344290831",
+      "id": "paragraph_1689883015090_1344290831",
+      "dateCreated": "2023-07-20 19:56:55.090",
+      "status": "READY"
+    },
+    {
+      "text": "%flink.ssql\n\n-- Create a source for table Product\n\nCREATE TABLE products (\n    id INT,\n    name STRING,\n    description STRING,\n    PRIMARY KEY (id) NOT ENFORCED\n  ) WITH (\n    \u0027connector\u0027 \u003d \u0027mysql-cdc\u0027,\n    \u0027hostname\u0027 \u003d \u0027localhost\u0027,\n    \u0027port\u0027 \u003d \u00273306\u0027,\n    \u0027username\u0027 \u003d \u0027root\u0027,\n    \u0027password\u0027 \u003d \u0027123456\u0027,\n    \u0027database-name\u0027 \u003d \u0027postgres\u0027,\n    \u0027schema-name\u0027 \u003d \u0027public\u0027,\n    \u0027table-name\u0027 \u003d \u0027products\u0027\n  );\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20 20:08:46.695",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689883036196_678239344",
+      "id": "paragraph_1689883036196_678239344",
+      "dateCreated": "2023-07-20 19:57:16.196",
+      "status": "READY"
+    },
+    {
+      "text": "%flink.ssql\n-- Create a landing zone for joined query (print)\n\n CREATE TABLE enriched_orders (\n   order_id INT,\n   order_date TIMESTAMP(0),\n   customer_name STRING,\n   price DECIMAL(10, 5),\n   product_id INT,\n   order_status BOOLEAN,\n   product_name STRING,\n   product_description STRING,\n   shipment_id INT,\n   origin STRING,\n   destination STRING,\n   is_arrived BOOLEAN,\n   PRIMARY KEY (order_id) NOT ENFORCED\n ) WITH (\n     \u0027connector\u0027 \u003d \u0027print\u0027\n );",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20 20:04:40.300",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689883246046_261057885",
+      "id": "paragraph_1689883246046_261057885",
+      "dateCreated": "2023-07-20 20:00:46.046",
+      "status": "READY"
+    },
+    {
+      "text": "%flink.ssql\n\n-- Main query to write the cdc data into landing zone table\n\nINSERT INTO enriched_orders\n SELECT o.*, p.name, p.description, s.shipment_id, s.origin, s.destination, s.is_arrived\n FROM orders AS o\n LEFT JOIN products AS p ON o.product_id \u003d p.id\n LEFT JOIN shipments AS s ON o.order_id \u003d s.order_id;",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20 20:02:44.381",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689883293768_435690197",
+      "id": "paragraph_1689883293768_435690197",
+      "dateCreated": "2023-07-20 20:01:33.768",
+      "status": "READY"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-07-20 20:02:44.485",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1689883364485_467116092",
+      "id": "paragraph_1689883364485_467116092",
+      "dateCreated": "2023-07-20 20:02:44.485",
+      "status": "READY"
+    }
+  ],
+  "name": "postgres-cdc-demo",
+  "id": "2J6TDHEY3",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

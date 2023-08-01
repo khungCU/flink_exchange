@@ -1,0 +1,299 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n\n\u003e :bulb: This example will show how you can identify and filter out duplicates in a stream of events.\n\nThere are different ways that duplicate events can end up in your data sources, from human error to application bugs. Regardless of the origin, unclean data can have a real impact in the quality (and correctness) of your results. Suppose that your order system occasionally generates duplicate events with the same `order_id`, and that you\u0027re only interested in keeping the most recent event for downstream processing.\n\nAs a first step, you can use a combination of the `COUNT` function and the `HAVING` clause to check if and which orders have more than one event; and then filter out these events using `ROW_NUMBER()`. In practice, deduplication is a special case of [Top-N aggregation](../05_top_n/05_top_n.md), where N is 1 (`rownum \u003d 1`) and the ordering column is either the processing or event time of events.",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-08 16:27:51.215",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cblockquote\u003e\n\u003cp\u003e💡 This example will show how you can identify and filter out duplicates in a stream of events.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eThere are different ways that duplicate events can end up in your data sources, from human error to application bugs. Regardless of the origin, unclean data can have a real impact in the quality (and correctness) of your results. Suppose that your order system occasionally generates duplicate events with the same \u003ccode\u003eorder_id\u003c/code\u003e, and that you\u0026rsquo;re only interested in keeping the most recent event for downstream processing.\u003c/p\u003e\n\u003cp\u003eAs a first step, you can use a combination of the \u003ccode\u003eCOUNT\u003c/code\u003e function and the \u003ccode\u003eHAVING\u003c/code\u003e clause to check if and which orders have more than one event; and then filter out these events using \u003ccode\u003eROW_NUMBER()\u003c/code\u003e. In practice, deduplication is a special case of \u003ca href\u003d\"../05_top_n/05_top_n.md\"\u003eTop-N aggregation\u003c/a\u003e, where N is 1 (\u003ccode\u003erownum \u003d 1\u003c/code\u003e) and the ordering column is either the processing or event time of events.\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614313688051_1570601018",
+      "id": "paragraph_1614313688051_1570601018",
+      "dateCreated": "2021-02-26 12:28:08.054",
+      "dateStarted": "2021-10-08 16:27:51.216",
+      "dateFinished": "2021-10-08 16:27:51.221",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%md\n\n本例将展示如何在事件流中识别并筛选出重复的事件。\n\n从人为错误到应用程序错误，重复的事件最终会以不同的方式出现在数据源中。不管来源如何，不干净的数据都会对结果的质量（和正确性）产生实际影响。假设您的订单系统偶尔会生成具有相同 `order_id` 的重复事件，并且您只想保留最新的事件以供下游处理。\n\n首先，您可以组合使用 `COUNT` 函数和 `HAVING` 语句来检查有没有重复的事件以及哪些订单有重复事件；然后使用 `ROW_NUMBER()` 来过滤掉这些事件。实际上，去重复数据是Top-N聚合的一种特殊情况，其中N是1（`rownum\u003d1`），排序字段可以是事件的处理时间或事件时间。\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-18 15:54:56.306",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003e本例将展示如何在事件流中识别并筛选出重复的事件。\u003c/p\u003e\n\u003cp\u003e从人为错误到应用程序错误，重复的事件最终会以不同的方式出现在数据源中。不管来源如何，不干净的数据都会对结果的质量（和正确性）产生实际影响。假设您的订单系统偶尔会生成具有相同 \u003ccode\u003eorder_id\u003c/code\u003e 的重复事件，并且您只想保留最新的事件以供下游处理。\u003c/p\u003e\n\u003cp\u003e首先，您可以组合使用 \u003ccode\u003eCOUNT\u003c/code\u003e 函数和 \u003ccode\u003eHAVING\u003c/code\u003e 语句来检查有没有重复的事件以及哪些订单有重复事件；然后使用 \u003ccode\u003eROW_NUMBER()\u003c/code\u003e 来过滤掉这些事件。实际上，去重复数据是Top-N聚合的一种特殊情况，其中N是1（\u003ccode\u003erownum\u003d1\u003c/code\u003e），排序字段可以是事件的处理时间或事件时间。\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1615117539626_58897275",
+      "id": "paragraph_1615117539626_58897275",
+      "dateCreated": "2021-03-07 11:45:39.626",
+      "dateStarted": "2021-03-18 15:54:56.310",
+      "dateFinished": "2021-03-18 15:54:56.323",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n\nDROP TABLE IF EXISTS orders;\n\nCREATE TABLE orders (\n  id INT,\n  order_time AS CURRENT_TIMESTAMP,\n  WATERMARK FOR order_time AS order_time - INTERVAL \u00275\u0027 SECONDS\n)\nWITH (\n  \u0027connector\u0027 \u003d \u0027datagen\u0027,\n  \u0027rows-per-second\u0027\u003d\u002710\u0027,\n  \u0027fields.id.kind\u0027\u003d\u0027random\u0027,\n  \u0027fields.id.min\u0027\u003d\u00271\u0027,\n  \u0027fields.id.max\u0027\u003d\u0027100\u0027\n);\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 12:28:48.077",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304246775_222173658",
+      "id": "paragraph_1614304246775_222173658",
+      "dateCreated": "2021-02-26 09:50:46.775",
+      "dateStarted": "2021-02-26 12:28:48.088",
+      "dateFinished": "2021-02-26 12:28:49.030",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql(type\u003dupdate)\n\n--Check for duplicates in the `orders` table\nSELECT id AS order_id,\n       COUNT(*) AS order_cnt\nFROM orders o\nGROUP BY id\nHAVING COUNT(*) \u003e 1;\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 12:28:53.794",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "order_id": "string",
+                      "order_cnt": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "http://localhost:8081#/job/2138ecd297e0c870258386db23aae2f8"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304259692_480547273",
+      "id": "paragraph_1614304259692_480547273",
+      "dateCreated": "2021-02-26 09:50:59.692",
+      "dateStarted": "2021-02-26 12:28:53.807",
+      "dateFinished": "2021-02-26 09:51:36.961",
+      "status": "ABORT"
+    },
+    {
+      "text": "%flink.ssql(type\u003dupdate)\n\n--Use deduplication to keep only the latest record for each `order_id`\nSELECT\n  order_id,\n  order_time\nFROM (\n  SELECT id AS order_id,\n         order_time,\n         ROW_NUMBER() OVER (PARTITION BY id ORDER BY order_time) AS rownum\n  FROM orders\n     )\nWHERE rownum \u003d 1;\nORDER BY order_time DESC\nLIMIT 10;\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 12:29:37.756",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "order_id": "string",
+                      "order_time": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "http://localhost:8081#/job/6bb5e0075b2a7a37b203ca5e8de665e3"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304280591_269871547",
+      "id": "paragraph_1614304280591_269871547",
+      "dateCreated": "2021-02-26 09:51:20.591",
+      "dateStarted": "2021-02-26 12:29:37.764",
+      "dateFinished": "2021-02-26 12:29:42.058",
+      "status": "ABORT"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-26 09:51:43.627",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614304303627_249077410",
+      "id": "paragraph_1614304303627_249077410",
+      "dateCreated": "2021-02-26 09:51:43.627",
+      "status": "READY"
+    }
+  ],
+  "name": "06 Deduplication",
+  "id": "2G21WQVZB",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.10.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
