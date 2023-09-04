@@ -58,7 +58,7 @@ services:
   postgres:
     container_name: postgres
     build: ./postgres-image
-    image: demo/postgres-pop
+    image: demo/postgres
     ports:
      - 5432:5432
     environment:

@@ -3,7 +3,7 @@
     {
       "text": "%flink.ssql\n\n\nDROP TABLE IF EXISTS orders;\n\nCREATE TABLE orders (\n    order_uid  BIGINT,\n    product_id BIGINT,\n    price      DOUBLE,\n    order_time TIMESTAMP(3)\n) WITH (\n    \u0027connector\u0027 \u003d \u0027datagen\u0027\n);\n\n",
       "user": "anonymous",
-      "dateUpdated": "2023-07-23 09:36:01.120",
+      "dateUpdated": "2023-08-01 16:03:06.359",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -37,14 +37,14 @@
       "jobName": "paragraph_1689027546861_1423168580",
       "id": "paragraph_1689027546861_1423168580",
       "dateCreated": "2023-07-10 22:19:06.861",
-      "dateStarted": "2023-07-23 09:36:01.169",
-      "dateFinished": "2023-07-23 09:36:23.706",
+      "dateStarted": "2023-08-01 16:03:06.417",
+      "dateFinished": "2023-08-01 16:03:52.294",
       "status": "FINISHED"
     },
     {
       "text": "%flink.ssql\nselect * from orders;",
       "user": "anonymous",
-      "dateUpdated": "2023-07-23 09:25:26.321",
+      "dateUpdated": "2023-08-01 16:04:57.404",
       "progress": 0,
       "config": {
         "colWidth": 12.0,
@@ -144,7 +144,7 @@
           "group": "flink",
           "values": [
             {
-              "jobUrl": "http://jobmanager:8081#/job/64ff99881c5fce12b48ba3c3bafcf2e7"
+              "jobUrl": "http://localhost:8081#/job/98a748290b4465f6949d9b6febb0342f"
             }
           ],
           "interpreterSettingId": "flink"
@@ -154,7 +154,7 @@
       "jobName": "paragraph_1689027624427_91351718",
       "id": "paragraph_1689027624427_91351718",
       "dateCreated": "2023-07-10 22:20:24.427",
-      "dateStarted": "2023-07-23 09:24:56.919",
+      "dateStarted": "2023-08-01 16:04:42.298",
       "dateFinished": "2023-07-16 15:22:53.984",
       "status": "ABORT"
     },
